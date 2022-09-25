@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Users from './app/components/users.jsx'
+import App from './app/App.js'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.css'
 
 import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(<Users />)
+root.render(<App />)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
