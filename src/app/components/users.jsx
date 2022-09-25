@@ -26,11 +26,9 @@ const Users = () => {
   }
 
   const trueOrFalse = (item) => {
-    console.log(item)
     setUsers((prevState) =>
       prevState.map((user) => {
         if (user._id === item._id) {
-          console.log(user.bookmark)
           user.bookmark = !user.bookmark
         }
         return user
