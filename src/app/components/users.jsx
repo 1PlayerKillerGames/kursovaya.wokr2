@@ -27,11 +27,15 @@ const Users = () => {
 
   const trueOrFalse = (item) => {
     console.log(item)
-    if (item.bookmark === false) {
-      return (item.bookmark = true)
-    } else if (item.bookmark === true) {
-      return (item.bookmark = false)
-    }
+    setUsers((prevState) =>
+      prevState.map((user) => {
+        if (user._id === item._id) {
+          console.log(user.bookmark)
+          user.bookmark = !user.bookmark
+        }
+        return user
+      })
+    )
   }
 
   const hendleDeleteUser = (id) => {
@@ -62,7 +66,6 @@ const Users = () => {
                 <td>
                   {item.qualities.map((qualities) => {
                     const colors = qualities.color
-
                     return (
                       <span className={'badge m-1 bg-' + colors}>
                         {qualities.name}
