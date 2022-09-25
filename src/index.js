@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Users from './components/users'
+import Users from './app/components/users.jsx'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.css'
 
