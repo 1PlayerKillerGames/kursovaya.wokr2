@@ -1,6 +1,7 @@
-import React from 'react'
-import Bookmark from './bookmark'
-import Qualiti from './qualitie'
+import React from "react"
+import Bookmark from "./bookmark"
+import Qualiti from "./qualitie"
+import PropTypes from "prop-types"
 
 const User = (props) => {
   return (
@@ -31,6 +32,18 @@ const User = (props) => {
       </td>
     </tr>
   )
+}
+
+User.propTypes = {
+  _id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  qualities: PropTypes.array.isRequired,
+  profession: PropTypes.object.isRequired,
+  completedMeetings: PropTypes.number.isRequired,
+  rate: PropTypes.number.isRequired,
+  bookmark: PropTypes.bool.isRequired,
+  handleDeleteUser: PropTypes.func.isRequired,
+  handleToggleBookMark: PropTypes.func.isRequired
 }
 
 export default User
