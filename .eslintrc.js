@@ -14,7 +14,10 @@ module.exports = {
     indent: ["error", 2],
     semi: ["error", "never"],
     quotes: ["error", "double", { allowTemplateLiterals: false }],
-    "space-before-function-paren": ["error", "never"],
+    "space-before-function-paren": [
+      "error",
+      { anonymous: "always", names: "never" }
+    ],
     "multiline-ternary": "off"
   }
 }
