@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const TableHeader = ({ onSort, selectedSort, columns, currentPath }) => {
+const TableHeader = ({ onSort, selectedSort, columns }) => {
   const handleSort = (item) => {
     if (selectedSort.path === item) {
       onSort({
@@ -11,21 +11,18 @@ const TableHeader = ({ onSort, selectedSort, columns, currentPath }) => {
     } else {
       onSort({ path: item, order: "asc" })
     }
-    console.log(selectedSort.path)
-    console.log(currentPath)
   }
 
   const arrowSort = (selectedSort, currentPath) => {
     if (selectedSort.path === currentPath) {
       if (selectedSort.order === "asc") {
-        return <i className="bi bi-caret-down-fill"></i>
-      } else {
         return <i className="bi bi-caret-up-fill"></i>
+      } else {
+        return <i className="bi bi-caret-down-fill"></i>
       }
     }
     return null
   }
-  console.log(arrowSort(selectedSort, currentPath))
 
   return (
     <thead>
@@ -42,6 +39,7 @@ const TableHeader = ({ onSort, selectedSort, columns, currentPath }) => {
             scope="col"
           >
             {columns[column].name}
+            {arrowSort(selectedSort, columns[column].path)}
           </th>
         ))}
       </tr>
@@ -52,8 +50,7 @@ const TableHeader = ({ onSort, selectedSort, columns, currentPath }) => {
 TableHeader.propTypes = {
   onSort: PropTypes.func.isRequired,
   selectedSort: PropTypes.object.isRequired,
-  columns: PropTypes.object.isRequired,
-  currentPath: PropTypes.string.isRequired
+  columns: PropTypes.object.isRequired
 }
 
 export default TableHeader

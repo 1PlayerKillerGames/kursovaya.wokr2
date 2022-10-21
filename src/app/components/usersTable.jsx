@@ -46,7 +46,6 @@ const UserTable = ({
       selectedSort={selectedSort}
       columns={columns}
       data={users}
-      currentPath={selectedSort.path}
     />
   )
 }

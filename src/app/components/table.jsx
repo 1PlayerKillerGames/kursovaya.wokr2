@@ -3,19 +3,12 @@ import PropTypes from "prop-types"
 import TableBody from "./tableBody"
 import TableHeader from "./tableHeader"
 
-const Table = ({
-  onSort,
-  selectedSort,
-  columns,
-  data,
-  children,
-  currentPath
-}) => {
+const Table = ({ onSort, selectedSort, columns, data, children }) => {
   return (
     <table className="table">
       {children || (
         <>
-          <TableHeader {...{ onSort, selectedSort, columns, currentPath }} />
+          <TableHeader {...{ onSort, selectedSort, columns }} />
           <TableBody {...{ columns, data }} />
         </>
       )}
