@@ -1,49 +1,50 @@
 import React from "react"
-import Bookmark from "./bookmark"
-import Qualiti from "./qualitie"
 import PropTypes from "prop-types"
-
-const User = (props) => {
+import Quality from "./quality"
+import BookMark from "./bookmark"
+const User = ({
+  _id,
+  name,
+  qualities,
+  profession,
+  completedMeetings,
+  rate,
+  onDelete,
+  bookmark,
+  onToggleBookMark
+}) => {
   return (
-    <tr key={props._id}>
-      <td>{props.name}</td>
+    <tr>
+      <td>{name}</td>
       <td>
-        {props.qualities.map((qualiti, key) => {
-          return <Qualiti key={key} color={qualiti.color} name={qualiti.name} />
-        })}
+        {qualities.map((qual) => (
+          <Quality {...qual} key={qual._id} />
+        ))}
       </td>
-      <td>{props.profession.name}</td>
-      <td>{props.completedMeetings}</td>
-      <td>{props.rate}/5</td>
+      <td>{profession.name}</td>
+      <td>{completedMeetings}</td>
+      <td>{rate} /5</td>
       <td>
-        <Bookmark
-          bookmark={props.bookmark}
-          id={props._id}
-          handleToggleBookMark={props.handleToggleBookMark}
-        />
+        <BookMark status={bookmark} onClick={() => onToggleBookMark(_id)} />
       </td>
       <td>
-        <button
-          onClick={() => props.handleDeleteUser(props._id)}
-          className="btn btn-danger btn-sm m-1"
-        >
+        <button onClick={() => onDelete(_id)} className="btn btn-danger">
           delete
         </button>
       </td>
     </tr>
   )
 }
-
 User.propTypes = {
   _id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  qualities: PropTypes.array.isRequired,
+  qualities: PropTypes.array,
   profession: PropTypes.object.isRequired,
   completedMeetings: PropTypes.number.isRequired,
   rate: PropTypes.number.isRequired,
-  bookmark: PropTypes.bool.isRequired,
-  handleDeleteUser: PropTypes.func.isRequired,
-  handleToggleBookMark: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired,
+  bookmark: PropTypes.bool,
+  onToggleBookMark: PropTypes.func.isRequired
 }
 
 export default User
