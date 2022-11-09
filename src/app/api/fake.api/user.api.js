@@ -80,7 +80,7 @@ const users = [
   },
   {
     _id: "67rdca3eeb7f6fgeed471820",
-    name: "Леонард Хофстедтер",
+    name: "Леонард Хофстеддер",
     profession: professions.physics,
     qualities: [qualities.strange, qualities.uncertain],
     completedMeetings: 147,
@@ -150,6 +150,14 @@ const fetchAll = () =>
     })
   })
 
+const getById = (id) =>
+  new Promise((resolve) => {
+    window.setTimeout(function () {
+      resolve(users.find((users) => users._id === id))
+    })
+  })
+
 export default {
-  fetchAll
+  fetchAll,
+  getById
 }
