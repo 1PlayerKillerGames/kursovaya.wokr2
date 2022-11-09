@@ -4,7 +4,8 @@ import { Route, Switch } from "react-router-dom"
 import Main from "./layouts/main"
 import Login from "./layouts/login"
 import UserS from "./layouts/users"
-import userInfo from "./layouts/userInfo"
+import UserInfo from "./layouts/userInfo"
+// import UserId from "./layouts/userId"
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Route path={"/login"} component={Login} />
         <Route path={"/users"} component={UserS} />
         <Route exact path={"/"} component={Main} />
-        <Route path={"/userInfo"} component={userInfo} />
+        <Route path={"/userInfo/:userId"} component={UserInfo} />
+        <Route path={"/userInfo"} component={UserInfo} />
       </Switch>
     </div>
   )

@@ -4,7 +4,6 @@ import BookMark from "./bookmark"
 import QualitiesList from "./qualitiesList"
 import Table from "./table"
 import UserId from "../layouts/userId"
-import UserInfo from "../layouts/userInfo"
 
 const UserTable = ({
   users,
@@ -18,8 +17,9 @@ const UserTable = ({
     name: {
       path: "name",
       name: "Имя",
-      component: (user) => <UserId users={user.name} />,
-      component2: (user) => <UserInfo users={user._id} />
+      component: (user) => (
+        <UserId users={user.name} userId={user._id} users1={users} />
+      )
     },
     qualities: {
       name: "Качество",
