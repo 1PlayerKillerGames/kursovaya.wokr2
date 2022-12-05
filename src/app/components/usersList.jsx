@@ -7,11 +7,13 @@ import GroupList from "./groupList"
 import SearchStatus from "./searchStatus"
 import _ from "lodash"
 import UsersTable from "./usersTable"
+import SearchByUsers from "./saerchByUsers"
 
-const Users = () => {
+const UsersList = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [professions, setProfession] = useState()
   const [selectedProf, setSelectedProf] = useState()
+  const [selectedUserName, setSelectedUserName] = useState("")
   const [sortBy, setSortBy] = useState({ path: "name", order: "desc" })
   const pageSize = 12
 
@@ -40,8 +42,13 @@ const Users = () => {
     setCurrentPage(1)
   }, [selectedProf])
 
-  const handleProfessionSelect = (item) => {
-    setSelectedProf(item)
+  // const handleProfessionSelect = (item) => {
+  //   setSelectedProf(item)
+  // }
+
+  const setProfFilter = (profession) => {
+    setSelectedProf(profession)
+    setSelectedUserName("")
   }
 
   const handlePageChange = (pageIndex) => {
@@ -52,17 +59,36 @@ const Users = () => {
     setSortBy(item)
   }
 
+  // const filtredUsers = users.filter((user) => {
+  //   return user.name.toLowerCase().includes(value.toLowerCase())
+  // })
+
+  // console.log(filtredUsers)
+
   if (users) {
-    const filteredUsers = selectedProf
-      ? users.filter((user) => _.isEqual(user.profession, selectedProf))
-      : users
+    const filteredUsers = users.filter((user) => {
+      if (selectedProf) {
+        if (!_.isEqual(user.profession, selectedProf)) {
+          return false
+        }
+      }
+      if (selectedUserName) {
+        if (!user.name.toLowerCase().includes(selectedUserName.toLowerCase())) {
+          return false
+        }
+      }
+      return true
+    })
 
     const count = filteredUsers.length
     const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]) // asc, desc
     const usersCrop = paginate(sortedUsers, currentPage, pageSize)
+
     const clearFilter = () => {
       setSelectedProf()
+      setSelectedUserName()
     }
+    console.log(selectedProf)
 
     return (
       <div className="d-flex">
@@ -71,7 +97,7 @@ const Users = () => {
             <GroupList
               selectedItem={selectedProf}
               items={professions}
-              onItemSelect={handleProfessionSelect}
+              onItemSelect={setProfFilter}
             />
             <button className="btn btn-secondary mt-2" onClick={clearFilter}>
               {" "}
@@ -81,6 +107,10 @@ const Users = () => {
         )}
         <div className="d-flex flex-column">
           <SearchStatus length={count} />
+          <SearchByUsers
+            onChange={setSelectedUserName}
+            key={selectedProf?.name || ""}
+          />
           {count > 0 && (
             <UsersTable
               users={usersCrop}
@@ -104,8 +134,8 @@ const Users = () => {
   }
   return "loading..."
 }
-Users.propTypes = {
+UsersList.propTypes = {
   users: PropTypes.array
 }
 
-export default Users
+export default UsersList
